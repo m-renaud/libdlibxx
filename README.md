@@ -28,7 +28,7 @@ of the function in the dynamic library as the function argument.
 auto func_symbol = lib.lookup<int()>("function_name");
 if (func_symbol)
 {
-  std::function<int()> f = func_symbol.get();
+  std::function<void(int)> f = func_symbol.get();
   f(5);
 }
 else
@@ -78,3 +78,16 @@ dl::handle lib;
 lib.resolve_policy(dl::resolve::lazy);
 ```
 
+#### Options
+
+In addition to the open policy, the options available for the `flag`
+argument to `dlopen` are also available. They can be set with the
+`set_options` member function before opening the library by ORing the
+enum values together. The values available are:
+
+- dl::options::none      = 0,
+- dl::options::global    = RTLD_GLOBAL,
+- dl::options::local     = RTLD_LOCAL,
+- dl::options::no\_delete = RTLD_NODELETE,
+- dl::options::no\_load   = RTLD_NOLOAD,
+- dl::options::deep\_bind = RTLD_DEEPBIND
