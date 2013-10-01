@@ -85,9 +85,16 @@ argument to `dlopen` are also available. They can be set with the
 `set_options` member function before opening the library by ORing the
 enum values together. The values available are:
 
-- dl::options::none      = 0,
-- dl::options::global    = RTLD_GLOBAL,
-- dl::options::local     = RTLD_LOCAL,
-- dl::options::no\_delete = RTLD_NODELETE,
-- dl::options::no\_load   = RTLD_NOLOAD,
-- dl::options::deep\_bind = RTLD_DEEPBIND
+```cpp
+dl::options::none      = 0,
+dl::options::global    = RTLD_GLOBAL,
+dl::options::local     = RTLD_LOCAL,
+dl::options::no_delete = RTLD_NODELETE,
+dl::options::no_load   = RTLD_NOLOAD,
+dl::options::deep_bind = RTLD_DEEPBIND
+```
+
+```cpp
+dl::handle lib;
+lib.set_options(dl::options::global | dl::options::no_load);
+```
