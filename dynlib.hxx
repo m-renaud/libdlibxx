@@ -193,7 +193,7 @@ private:
 
 		// If there was an error, return an uninitialized optional.
 		char* error_message;
-		if ((werror_message = ::dlerror()) != NULL)
+		if ((error_message = ::dlerror()) != NULL)
 		{
 			error_ = error_message;
 			return boost::optional< std::function<Ret (Args...)> >();
