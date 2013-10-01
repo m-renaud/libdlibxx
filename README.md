@@ -1,6 +1,6 @@
 # Dynlib
 
-Dynlib is a generalized C++ wrapper around the `dl`*xyz* functions
+Dynlib is a generalized C++ wrapper around the dl functions
 from `<dlfcn.h>` to handle the loading and symbol lookup in dynamic
 libraries.
 
