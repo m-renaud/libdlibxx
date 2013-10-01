@@ -50,7 +50,10 @@ class base_type
 };
 
 std::shared_ptr<base_type> p = lib.create<base_type>("factory_function");
-p->foo();
+if (p)
+  p->foo();
+else
+  std::cout << "Unable to create instance.\n";
 ```
 
 #### Symbol Resolution Policy

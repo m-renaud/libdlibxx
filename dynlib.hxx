@@ -126,9 +126,11 @@ public:
 	inline auto create(char const* fname, Args&&... args) const
 		-> std::shared_ptr<T>
 	{
-		return std::shared_ptr<T>(
-			this->symbol_lookup_impl<T*>(fname).get()(std::forward<Args>(args)...)
-		);
+		auto factory_symbol = this->symbol_lookup_impl<T*>(fname);
+		if (factory_symbol)
+			return std::shared_ptr<T>(factory_symbol.get()(std::forward<Args>(args)...));
+		else
+			return std::shared_ptr<T>(nullptr);
 	}
 
 	template <typename T, typename... Args>
