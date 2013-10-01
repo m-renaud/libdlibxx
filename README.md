@@ -25,7 +25,7 @@ of the function in the dynamic library as the function argument.
 
 ```cpp
 // Get an optional<function<Signature>> to the function.
-auto func_symbol = lib.lookup<int()>("function_name");
+auto func_symbol = lib.lookup<void(int)>("function_name");
 if (func_symbol)
 {
   std::function<void(int)> f = func_symbol.get();
@@ -42,6 +42,9 @@ else
 Due to the frequency of which dynamic libraries are used to create an
 instance of an abstract class satisfying some interface, a simple interface
 for creating objects from factory methods is provided.
+
+If the instance could not be created, a `shared_ptr` containing
+`nullptr` will be returned.
 
 ```cpp
 class base_type
@@ -60,8 +63,8 @@ else
 
 When loading the dynamic library, it can be specified whether all symbols
 should be bound on opening or only when they are referenced. The
-default is to bind all symbols when the library is loaded, but lazy
-binding is also available.
+default is to bind all symbols when the library is loaded (through the
+use of `dl::resolve::now`), but lazy binding is also available.
 
 It can be specified in the constructor as follows:
 
@@ -93,6 +96,8 @@ dl::options::no_delete = RTLD_NODELETE,
 dl::options::no_load   = RTLD_NOLOAD,
 dl::options::deep_bind = RTLD_DEEPBIND
 ```
+
+(See `man dlopen` for information on options.)
 
 ```cpp
 dl::handle lib;
