@@ -126,7 +126,7 @@ public:
 	inline auto create(char const* fname, Args&&... args) const
 		-> std::shared_ptr<T>
 	{
-		auto factory_symbol = this->symbol_lookup_impl<T*>(fname);
+		auto factory_symbol = this->symbol_lookup_impl<T*,Args...>(fname);
 		if (factory_symbol)
 			return std::shared_ptr<T>(factory_symbol.get()(std::forward<Args>(args)...));
 		else
