@@ -93,7 +93,8 @@ public:
 	}
 
 	// Load the dynamic library named NAME.
-	void load(std::string const& name)
+	// If NAME is empty, open a handle for the main program. (see man dlopen)
+	void load(std::string const& name = "")
 	{
 		this->close();
 		int resolve_flag =
