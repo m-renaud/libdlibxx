@@ -52,7 +52,7 @@ If the instance could not be created, a `shared_ptr` containing
 `nullptr` will be returned.
 
 ```cpp
-class base_type
+struct base_type
 {
   virtual void foo() = 0;
 };
