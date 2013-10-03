@@ -109,9 +109,9 @@ dl::handle lib;
 lib.set_options(dl::options::global | dl::options::no_load);
 ```
 
-### Test Code
+### Example Code
 
-- The `dynlib.hxx` file has been symlinked to the test directory.
+- The `dynlib.hxx` will need to be symlinked to the `example` directory.
 
 Build the plugins:
 
