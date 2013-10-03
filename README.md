@@ -4,6 +4,11 @@ Dynlib is a generalized C++ wrapper around the dl functions
 from `<dlfcn.h>` to handle the loading and symbol lookup in dynamic
 libraries.
 
+### Dependencies
+
+Until `optional` is introduced into the standard, this code relies on
+Boost.Optional.
+
 ### Usage
 
 #### Loading Dynamic Libraries
@@ -70,7 +75,7 @@ It can be specified in the constructor as follows:
 
 ```cpp
 dl::handle lib("library-name.so", dl::resolve::lazy);
-	
+
 ```
 
 Additionally, if you already have a handle, you can set the resolution
@@ -103,3 +108,29 @@ dl::options::deep_bind = RTLD_DEEPBIND
 dl::handle lib;
 lib.set_options(dl::options::global | dl::options::no_load);
 ```
+
+### Test Code
+
+- The `dynlib.hxx` file has been symlinked to the test directory.
+
+Build the plugins:
+
+```bash
+g++ -std=c++11 -shared -fPIC plugin-a.cxx -o a.so
+g++ -std=c++11 -shared -fPIC plugin-b.cxx -o b.so
+g++ -std=c++11 -shared -fPIC plugin-c.cxx -o c.so
+```
+
+Build the driver class:
+
+```bash
+g++ -std=c++11 driver.cxx -o driver -ldl
+```
+
+Run the driver code with `./driver` and when prompted enter:
+
+- `./a.so`
+- `./b.so`
+- `./c.so`
+
+and observe the results.
