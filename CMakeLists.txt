@@ -8,8 +8,29 @@ set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 0)
 
-include_directories(lib/include)
+include_directories(include)
 
-add_subdirectory(lib)
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+### Build libdlibxx
+add_library(
+  dlibxx SHARED
+  "${PROJECT_SOURCE_DIR}/lib/src/dlibxx.cxx"
+)
+
+target_link_libraries(dlibxx dl)
+
+set_target_properties(
+  dlibxx PROPERTIES
+  SOVERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
+)
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+### Install Rules
+install(TARGETS dlibxx DESTINATION lib)
+install(FILES "${PROJECT_SOURCE_DIR}/lib/include/dlibxx.hxx" DESTINATION include)
+
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+### Examples
 add_subdirectory(examples)
 
