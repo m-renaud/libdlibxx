@@ -1,0 +1,6 @@
+pkgname=libdlibxx
+pkgver=1.0.0
+pkgdesc="A C++11 wrapper around dlfcn.h"
+url="https://github.com/mrenaud92/libdlibxx"
+license=('FreeBSD')
+depends=('gcc-libs' 'cmake' 'boost-libs')
