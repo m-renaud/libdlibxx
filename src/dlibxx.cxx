@@ -2,7 +2,6 @@
 
 namespace dlibxx {
 
-
 handle::handle(std::string const& name)
 	: name_(name)
 {
@@ -34,6 +33,13 @@ void handle::load(std::string const& name)
 		handle_ = ::dlopen(NULL, resolve_flag);
 	else
 		handle_ = ::dlopen(name.c_str(), resolve_flag);
+
+	name_ = name;
+}
+
+std::string const& handle::get_lib_name() const
+{
+	return name_;
 }
 
 std::string const& handle::error() const

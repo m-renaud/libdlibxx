@@ -76,6 +76,8 @@ public:
 	// If NAME is empty, open a handle for the main program. (see man dlopen)
 	void load(std::string const& name = "");
 
+	std::string const& get_lib_name() const;
+
 	// Return the last error that occured for this handle.
 	std::string const& error() const;
 
