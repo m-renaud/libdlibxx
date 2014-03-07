@@ -1,5 +1,5 @@
-#ifndef DYNLIB_HXX__
-#define DYNLIB_HXX__
+#ifndef LIBDLIBXX_HXX__
+#define LIBDLIBXX_HXX__
 
 #include <dlfcn.h>
 #include <functional>
@@ -7,7 +7,7 @@
 
 #include <boost/optional.hpp> // Will be replaced with std::optional in C++14.
 
-namespace dl {
+namespace dlibxx {
 
 namespace util {
 
@@ -62,63 +62,25 @@ class handle
 {
 public:
 	handle() = default;
+	handle(std::string const& name);
 
-	handle(std::string const& name)
-		: name_(name)
-	{
-		this->load(name_);
-	}
-
-	~handle()
-	{
-		this->close();
-	}
+	~handle();
 
 	// Return true if is a valid handle.
-	operator bool () const
-	{
-		return handle_;
-	}
+	inline operator bool () const	{	return handle_; }
 
-	// Set the policy for when symbols will be resolved.
-	void resolve_policy(::dl::resolve rt)
-	{
-		resolve_time_ = rt;
-	}
-
-	// Set additional options for the behaviour of the handle.
-	void set_options(::dl::options opts)
-	{
-		resolve_options_ = opts;
-	}
+	void resolve_policy(::dlibxx::resolve rt);
+	void set_options(::dlibxx::options opts);
 
 	// Load the dynamic library named NAME.
 	// If NAME is empty, open a handle for the main program. (see man dlopen)
-	void load(std::string const& name = "")
-	{
-		this->close();
-		int resolve_flag =
-			static_cast<int>(resolve_time_) | static_cast<int>(resolve_options_);
+	void load(std::string const& name = "");
 
-		if (name.size() == 0)
-			handle_ = ::dlopen(NULL, resolve_flag);
-		else
-			handle_ = ::dlopen(name.c_str(), resolve_flag);
-	}
-
-	// Return the last error that occured for this handle..
-	std::string const& error() const
-	{
-		return error_;
-	}
+	// Return the last error that occured for this handle.
+	std::string const& error() const;
 
 	// Close this handle to the dynamic library.
-	void close()
-	{
-		if (handle_)
-			::dlclose(handle_);
-	}
-
+	void close();
 
 	//m=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// Create an instance of a type using the FNAME factory function.
@@ -164,8 +126,8 @@ public:
 private:
 	// Member data.
 	std::string name_ = "";
-	::dl::resolve resolve_time_ = ::dl::resolve::now;
-	::dl::options resolve_options_ = ::dl::options::none;
+	::dlibxx::resolve resolve_time_ = ::dlibxx::resolve::now;
+	::dlibxx::options resolve_options_ = ::dlibxx::options::none;
 	void* handle_ = nullptr;
 	mutable std::string error_ = "";
 
@@ -190,7 +152,7 @@ private:
 		::dlerror();
 
 		// Lookup the symbol from the dynamic library.
-		auto fptr = ::dl::util::fptr_cast<Ret, Args...>(
+		auto fptr = ::dlibxx::util::fptr_cast<Ret, Args...>(
 			::dlsym(handle_, fname)
 		);
 
@@ -233,6 +195,6 @@ private:
 
 }; // struct handle
 
-} // namespace dl
+} // namespace dlibxx
 
-#endif // #ifndef DYNLIB_HXX__
+#endif // #ifndef LIBDLIB_HXX__

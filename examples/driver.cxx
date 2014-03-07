@@ -2,19 +2,19 @@
 #include <memory>
 
 #include "plugin.hxx"
-#include "dynlib.hxx"
+#include "dlibxx.hxx"
 
 
 int main()
 {
 	std::string libname;
-	dl::handle lib;
+	dlibxx::handle lib;
 
 	// Resolve symbols when they are referenced instead of on load.
-	lib.resolve_policy(dl::resolve::lazy);
+	lib.resolve_policy(dlibxx::resolve::lazy);
 
 	// Make symbols available for resolution in subsequently loaded libraries.
-	lib.set_options(dl::options::global | dl::options::no_delete);
+	lib.set_options(dlibxx::options::global | dlibxx::options::no_delete);
 
 	std::cout << "Enter the name of the library you wish to load: ";
 	while (std::cin >> libname)
