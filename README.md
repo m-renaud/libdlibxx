@@ -23,6 +23,10 @@ dlibxx::handle lib;
 lib.load("library-name.so");
 ```
 
+#### Linking to libdlibxx
+
+To link to this library, pass the command line argument `-ldlibxx`.
+
 #### Symbol Lookup
 
 Symbol lookup is performed with the `lookup` member function. You must
