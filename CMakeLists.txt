@@ -14,7 +14,7 @@ include_directories(include)
 ### Build libdlibxx
 add_library(
   dlibxx SHARED
-  "${PROJECT_SOURCE_DIR}/lib/src/dlibxx.cxx"
+  "${PROJECT_SOURCE_DIR}/src/dlibxx.cxx"
 )
 
 target_link_libraries(dlibxx dl)
@@ -27,7 +27,7 @@ set_target_properties(
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ### Install Rules
 install(TARGETS dlibxx DESTINATION lib)
-install(FILES "${PROJECT_SOURCE_DIR}/lib/include/dlibxx.hxx" DESTINATION include)
+install(FILES "${PROJECT_SOURCE_DIR}/include/dlibxx.hxx" DESTINATION include)
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
