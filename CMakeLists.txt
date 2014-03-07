@@ -26,8 +26,9 @@ set_target_properties(
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ### Install Rules
-install(TARGETS dlibxx DESTINATION lib)
-install(FILES "${PROJECT_SOURCE_DIR}/include/dlibxx.hxx" DESTINATION include)
+install(TARGETS dlibxx DESTINATION "lib")
+install(FILES "${PROJECT_SOURCE_DIR}/include/dlibxx.hxx" DESTINATION "include")
+install(FILES "${PROJECT_SOURCE_DIR}/LICENSE" DESTINATION "share/licenses/${PROJECT_NAME}")
 
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
