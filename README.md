@@ -10,6 +10,10 @@ dynamic libraries.
   Boost.Optional.
 - A C++11 compiler.
 
+### Licence
+
+This library is licensed under the FreeBSD license.
+
 ### Usage
 
 #### Loading Dynamic Libraries
