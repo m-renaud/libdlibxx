@@ -124,6 +124,10 @@ public:
 		return this->lookup<Prototype>(fname.c_str());
 	}
 
+	inline bool loaded() const
+	{
+		return handle_ != nullptr;
+	}
 
 private:
 	// Member data.
