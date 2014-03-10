@@ -29,10 +29,20 @@ void handle::load(std::string const& name)
 	int resolve_flag =
 		static_cast<int>(resolve_time_) | static_cast<int>(resolve_options_);
 
+	// Clear previous errors.
+	::dlerror();
+
 	if (name.size() == 0)
 		handle_ = ::dlopen(NULL, resolve_flag);
 	else
 		handle_ = ::dlopen(name.c_str(), resolve_flag);
+
+	char* error_message = ::dlerror();
+	if (error_message != NULL)
+	{
+		error_ = error_message;
+		return;
+	}
 
 	name_ = name;
 }
@@ -50,7 +60,9 @@ std::string const& handle::error() const
 void handle::close()
 {
 	if (handle_)
-			::dlclose(handle_);
+		::dlclose(handle_);
+
+	handle_ = nullptr;
 }
 
 } // namespace dlibxx
