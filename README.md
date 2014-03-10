@@ -16,6 +16,10 @@ This library is licensed under the FreeBSD license.
 
 ### Usage
 
+#### Linking to libdlibxx
+
+To link to this library, pass the command line argument `-ldlibxx`.
+
 #### Loading Dynamic Libraries
 
 ```cpp
@@ -27,15 +31,29 @@ dlibxx::handle lib;
 lib.load("library-name.so");
 ```
 
-#### Linking to libdlibxx
+#### Library Loading Error Handling
 
-To link to this library, pass the command line argument `-ldlibxx`.
+If the library was loaded successfully, a call to the `loaded()`
+function will return `true`. Error handling code could be performed as
+follows after a library has been loaded.
+
+```cpp
+if (!lib.loaded())
+{
+  std::cerr << lib.error() << std::endl;
+  return 1;
+}
+```
 
 #### Symbol Lookup
 
 Symbol lookup is performed with the `lookup` member function. You must
 pass in the type of the function as the template parameter and the name
 of the function in the dynamic library as the function argument.
+
+If the function was successfully loaded, then the `optional` when
+cast to bool will return `true`, and `false` otherwise. After a
+successful load, the function can be retrieved via a call to `get()`.
 
 ```cpp
 // Get an optional<function<Signature>> to the function.
