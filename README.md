@@ -140,7 +140,7 @@ lib.set_options(dlibxx::options::global | dlibxx::options::no_load);
 
 Run `make` and change to the `examples/` directory.
 
-Run the driver code with `./driver` and when prompted enter:
+Run the demo code with `./demo` and when prompted enter:
 
 - `./liba.so`
 - `./libb.so`

@@ -2,7 +2,7 @@
 #include <memory>
 
 #include "plugin.hxx"
-#include "dlibxx.hxx"
+#include <dlibxx.hxx>
 
 
 int main()
@@ -21,6 +21,13 @@ int main()
 	{
 		// Load the library specified.
 		lib.load(libname);
+
+		if (!lib.loaded())
+		{
+			std::cerr << lib.error() << std::endl;
+			std::cout << "Enter the name of the library you wish to load: ";
+			continue;
+		}
 
 		// Attempt to create a plugin instance using the "create_plugin"
 		// factory method from the dynamic library.
