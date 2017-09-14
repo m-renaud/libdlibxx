@@ -48,7 +48,7 @@ enum class options
 };
 
 // Allow ORing two options together.
-options operator | (options lhs, options rhs)
+inline options operator | (options lhs, options rhs)
 {
 	return static_cast<options>(
 		static_cast<int>(lhs) | static_cast<int>(rhs)
