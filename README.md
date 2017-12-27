@@ -147,3 +147,30 @@ Run the demo code with `./demo` and when prompted enter:
 - `./libc.so`
 
 and observe the results.
+
+### Testing
+
+To enable and run the unit tests you first need to ensure that you have
+initialized the submodules so that gtest/gmock are available:
+
+```bash
+git submodule update --init
+```
+
+Enable testing:
+```bash
+cd build
+cmake -DDLIBXX_ENABLE_TESTS=ON ..
+```
+
+Running `make` will now build the unit tests as well. Run the tests with one of
+the following:
+* `make test`
+* `ctest`
+* `ctest -V` - to see the output from gtest
+
+### Contributing
+
+In order to successfully contribute code there must be corresponding test code
+that fully demonstrates that the contribution works as intended. See previous
+section on enabling and running the unit test suite.

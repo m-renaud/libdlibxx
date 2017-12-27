@@ -8,6 +8,8 @@ set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 0)
 
+option(DLIBXX_ENABLE_TESTS OFF "Enable testing")
+
 include_directories(include)
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -35,3 +37,8 @@ install(FILES "${PROJECT_SOURCE_DIR}/LICENSE" DESTINATION "share/licenses/${PROJ
 ### Examples
 add_subdirectory(examples)
 
+if (DLIBXX_ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(external/googletest EXCLUDE_FROM_ALL)
+  add_subdirectory(test)
+endif()
