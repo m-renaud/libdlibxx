@@ -13,6 +13,13 @@ option(DLIBXX_ENABLE_TESTS OFF "Enable testing")
 include_directories(include)
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+### Find dependencies
+## We require version 1.58.0 or later for the `value` function in
+## `boost::optional` that allows us to interchange with `std::optional`
+find_package (Boost 1.58.0 REQUIRED)
+include_directories (${Boost_INCLUDE_DIRS})
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ### Build libdlibxx
 add_library(
   dlibxx SHARED
